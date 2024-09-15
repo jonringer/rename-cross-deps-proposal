@@ -1,5 +1,5 @@
 ---
-Title: Change dependency inputs to more intuitive names
+Title: Rename dependency inputs to be more intuitive
 Author: jonringer
 Discussions-To: https://github.com/NixOS/nixpkgs/issues/28327
 Status: Draft
@@ -29,7 +29,8 @@ of using nixpkgs.
 | depsTargetTarget | targetDeps     | Dependency needs to be used/injected unaltered at runtime by package we're building | gobject-inspection |
 
 Currently these are implemented as a "doubly linked list" where you can go forward and backward
-between `stdenv`s which target different build/host/target triplets.
+between `stdenv`s which target different build/host/target triplets. Also, a spliced package
+set is needed to pass a spliced drv which can provide the correct variant. E.g. `drv.__spliced.deps<host><target>`
 
 ```
 # pkgs/stdenv/booter.nix
