@@ -10,7 +10,7 @@ Created: 2024-9-15
 
 # Summary
 
-The names `nativeBuildInputs` and `buildInputs are often unintuitive to newcomers
+The names `nativeBuildInputs` and `buildInputs` are often unintuitive to newcomers
 and don't fit into the more normalized naming of `deps<Host><Target>` established
 in [nixpkgs#26805](https://github.com/NixOS/nixpkgs/pull/26805). This proposal
 tries to adopt more ergonomic naming of derivation dependencies based on learnings
