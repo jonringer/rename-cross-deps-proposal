@@ -19,14 +19,14 @@ of using nixpkgs.
 
 ## Detailed Implementation
 
-| Current Names    | Proposed Names | Simple Description | Example    |
-| --------         | -------        | --------------     | ---------  |
-| depsBuildBuild   | bootstrapDeps  | Dependency is a compiler, which produces things for buildPlatform. | `autotools` checking compiler compatibility may build and run built programs, these cannot target Host or Target platforms |
-| depsBuildHost    | buildtimeDeps  | Dependency is a tool which runs on the build platform, but produces code which runs on host | `cmake`, `meson`, `ninja` |
-| depsBuildTarget  | **removed**    | Dependency is a compiler, but produces code not for host, but for target platform. This is bad. | **none** |
-| depsHostHost     | **removed**    | Dependency runs on host platform, and can be used only during build. Currently depsBuildBuild is used instead. | **none** |
-| depsHostTarget   | runtimeDeps    | Dependency is the same as this derivation. Runs on host, produces code for target platform | C/C++ libraries |
-| depsTargetTarget | targetDeps     | Dependency needs to be used/injected unaltered at runtime by package we're building | gobject-inspection |
+| Current Names    | Legacy Names | Proposed Names | Simple Description | Example    |
+| --------         | -------      | ----------     | --------------     | ---------  |
+| depsBuildBuild   |    | bootstrapDeps  | Dependency is a compiler, which produces things for buildPlatform. | `autotools` checking compiler compatibility may build and run built programs, these cannot target Host or Target platforms |
+| depsBuildHost | nativeBuildInputs   |  buildtimeDeps  | Dependency is a tool which runs on the build platform, but produces code which runs on host | `cmake`, `meson`, `ninja` |
+| depsBuildTarget  |    |  **removed**    | Dependency is a compiler, but produces code not for host, but for target platform. This is bad. | **none** |
+| depsHostHost     |    |  **removed**    | Dependency runs on host platform, and can be used only during build. Currently depsBuildBuild is used instead. | **none** |
+| depsHostTarget |  buildInputs  |  runtimeDeps    | Dependency is the same as this derivation. Runs on host, produces code for target platform | C/C++ libraries |
+| depsTargetTarget |    |  targetDeps     | Dependency needs to be used/injected unaltered at runtime by package we're building | gobject-inspection |
 
 Currently these are implemented as a "doubly linked list" where you can go forward and backward
 between `stdenv`s which target different build/host/target triplets. Also, a spliced package
